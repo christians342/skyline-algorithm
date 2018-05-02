@@ -1,0 +1,29 @@
+import csv
+import sys
+
+
+def dominates(mainPoint, comparedPoint):
+    if int(mainPoint[0]) <= int(comparedPoint[0]) and int(mainPoint[1]) <= int(comparedPoint[1]):
+        return True
+    return False
+
+def getSkyline(points):
+    skylinePoints = []
+    for mainPoint in points:
+        isDominated = False
+        for comparedPoint in points:
+            if comparedPoint == mainPoint:
+                continue
+            if dominates(mainPoint, comparedPoint):
+                isDominated = True
+        if isDominated == False:
+            skylinePoints += [mainPoint]
+    return skylinePoints
+
+if __name__ == '__main__':
+    with open(sys.argv[1], newline='') as csvfile:
+        points = csv.reader(csvfile, delimiter=';')
+        points = list(points)
+        skylinePoints = getSkyline(points)
+        for skylinePoint in skylinePoints:
+            print(skylinePoint)
