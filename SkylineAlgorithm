@@ -2,7 +2,7 @@ import csv
 import sys
 
 
-def dominates(mainPoint, comparedPoint):
+def isDominatedBy(mainPoint, comparedPoint):
     if int(mainPoint[0]) <= int(comparedPoint[0]) and int(mainPoint[1]) <= int(comparedPoint[1]):
         return True
     return False
@@ -14,7 +14,7 @@ def getSkyline(points):
         for comparedPoint in points:
             if comparedPoint == mainPoint:
                 continue
-            if dominates(mainPoint, comparedPoint):
+            if isDominatedBy(mainPoint, comparedPoint):
                 isDominated = True
         if isDominated == False:
             skylinePoints += [mainPoint]
